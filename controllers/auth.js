@@ -101,25 +101,32 @@ exports.login = async (req, res) => {
 
 
 exports.logout = async (req, res) => {
-    try{
-        const user = req.user
-        if(!user) return res.json({ error: 'User is Invalid' })
-        user.isOnline = false
-        await user.save()
-        res.cookie('token', '', {
+    try {
+        const user = req.user;
+        if (!user) return res.json({ error: "User is Invalid" });
+
+        user.isOnline = false;
+        await user.save();
+
+        res.cookie("token", "", {
             httpOnly: true,
-            expires: new Date(0)
-        }).json({
+            expires: new Date(0),
+            sameSite: "None",
+            secure: true,
+        });
+
+        return res.json({
             success: true,
-            message: 'You are Logged Out'
-        })
-    } catch(err){
-        res.json({
+            message: "You are Logged Out",
+        });
+    } catch (err) {
+        res.status(500).json({
             success: false,
-            error: 'Error in Logging Out'
-        })
+            error: "Error in Logging Out",
+        });
     }
-}
+};
+
 
 exports.loggedIn = async (req, res) => {
     try{
