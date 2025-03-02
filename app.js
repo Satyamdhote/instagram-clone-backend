@@ -8,10 +8,10 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors')
 
 app.use(cors({
-    origin: "http://localhost:3000", // ✅ Set the exact frontend URL
-    credentials: true, // ✅ Allow cookies & authorization headers
-    methods: ["GET", "POST", "PUT", "DELETE"], // ✅ Allowed HTTP methods
-    allowedHeaders: ["Content-Type", "Authorization"] // ✅ Allowed headers
+    origin: ["http://localhost:3000", "https://instaclone0507.netlify.app"],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 
