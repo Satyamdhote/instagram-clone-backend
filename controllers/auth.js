@@ -86,9 +86,13 @@ exports.login = async (req, res) => {
         }
 
         // Send token in cookie and response
-        res.cookie('token', token, { httpOnly: true })
-           .status(200)
-           .json({ success: true, token });
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "None",
+            path: "/", 
+            maxAge: 7 * 24 * 60 * 60 * 1000
+        });
 
     } catch (err) {
         console.error('Server Error:', err);
