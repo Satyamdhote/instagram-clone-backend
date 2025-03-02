@@ -92,8 +92,7 @@ exports.login = async (req, res) => {
             sameSite: "None",
             path: "/", 
             maxAge: 7 * 24 * 60 * 60 * 1000
-        });
-
+        }).status(200).json({success: true, token});
     } catch (err) {
         console.error('Server Error:', err);
         res.status(500).json({ success: false, error: 'Internal Server Error' });
